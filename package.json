@@ -1,0 +1,36 @@
+{
+  "name": "proshore-articles",
+  "version": "1.0.0",
+  "description": "PROSHORE Articles",
+  "main": "index.js",
+  "repository": "git@github.com:SamirSir/proshore-articles.git",
+  "author": "SamirSir <acharyasamir421@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --project tsconfig.json",
+    "clean": "rm -rf ./dist",
+    "start": "node dist/server.js",
+    "build:watch": "tsc --watch",
+    "start:watch": "nodemon dist/server.js",
+    "start:dev": "nodemon --exec ts-node --type-check src/server.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "module-alias": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/module-alias": "^2.0.4",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "_moduleAliases": {
+    "@src": "./dist"
+  }
+}
