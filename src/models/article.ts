@@ -1,8 +1,8 @@
 import { Schema, model, } from 'mongoose';
 
-import { ArticleInterface } from '../interfaces';
+import { IArticle } from '../interfaces';
 
-const articleSchema = new Schema<ArticleInterface>({
+const articleSchema = new Schema<IArticle>({
     title: {
         type: String,
     },
@@ -21,4 +21,4 @@ const articleSchema = new Schema<ArticleInterface>({
     },
 });
 
-export const Article = model<ArticleInterface>('Article', articleSchema);
+export const Article = model<IArticle>('Article', articleSchema);
