@@ -1,4 +1,4 @@
-import * as Sequelize from 'sequelize';
+import { CreationOptional, Model } from 'sequelize';
 
 import { ModelTimestampExtend } from '.';
 
@@ -9,9 +9,7 @@ export interface InputUserInterface {
 }
 
 export interface UserInterface extends InputUserInterface, ModelTimestampExtend {
-    id: Sequelize.CreationOptional<number>;
+    id: CreationOptional<number>;
 }
 
-export interface UserModelInterface
-    extends Sequelize.Model<UserInterface, Partial<InputUserInterface>>,
-    UserInterface { }
+export interface UserModelInterface extends Model<UserInterface, Partial<InputUserInterface>>, UserInterface { }

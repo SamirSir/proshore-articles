@@ -1,1 +1,2 @@
-export * from './article.routes';
+export * from './article.route';
+export * from './user.route';

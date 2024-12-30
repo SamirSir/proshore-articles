@@ -5,16 +5,15 @@ import morgan from 'morgan';
 // import swaggerUI from 'swagger-ui-express';
 import basicAuth from 'express-basic-auth';
 
-import { articleRouter } from './routes';
-import { optionsSwaggerUI, swaggerSpec } from './utils';
 import {
-    appHost,
     appPort,
     appCorsWhitelist,
     Database,
     swaggerBasicAuth,
+    appHostURI,
 } from './config';
-
+import { articleRouter, userRouter } from './routes';
+import { optionsSwaggerUI, swaggerSpec } from './utils';
 
 class Server {
     expressApp: express.Application;
@@ -32,7 +31,8 @@ class Server {
         this.expressApp.use(morgan('dev'));
 
         // API Routes
-        this.expressApp.use('/api/v1/articles', articleRouter);
+        this.expressApp.use('/api/v1/auth', userRouter);
+        // this.expressApp.use('/api/v1/articles', articleRouter);
 
         // Swagger
         this.expressApp.get(
@@ -71,7 +71,7 @@ class Server {
             if (!origin || appCorsWhitelist.indexOf(origin) !== -1) {
                 callback(null, true);
             } else {
-                callback(new Error('CORS not allowed !!'));
+                callback(new Error('CORS not allowed !!!'));
             }
         },
         optionsSuccessStatus: 200,
@@ -90,7 +90,7 @@ class Server {
     public start() {
         this.connectDB();
         this.expressApp.listen(this.expressApp.get('port'), () =>
-            console.info(`🚀 Server is running at ${appHost}:${this.expressApp.get('port')}`)
+            console.info(`🚀 Server is running at ${appHostURI}`)
         );
     }
 }

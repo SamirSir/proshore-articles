@@ -19,8 +19,8 @@ const mustExist = <T>(value: T | undefined, name: string): T => {
 export const
     appName = mustExist(process.env.APP_NAME, 'APP_NAME'),
     appEnvironment = mustExist(process.env.APP_ENVIRONMENT as EnvironmentEnum, 'APP_ENVIRONMENT'),
-    appPort = +mustExist(+process.env.APP_PORT!, 'APP_PORT'),
     appHost = mustExist(process.env.APP_HOST, 'APP_HOST'),
+    appPort = +mustExist(+process.env.APP_PORT!, 'APP_PORT'),
     appHostURI = mustExist(process.env.APP_HOST_URI, 'APP_HOST_URI'),
     appCorsWhitelist = mustExist(process.env.APP_CORS_WHITE_LIST!, 'APP_CORS_WHITE_LIST').split(','),
     db = {
@@ -37,6 +37,9 @@ export const
         timezone: 'utc',
         maxPool: 10,
         minPool: 1,
+    },
+    jwtAuthSecret = {
+        access: mustExist(process.env.JWT_AUTH_SECRET_ACCESS, 'JWT_AUTH_SECRET_ACCESS'),
     },
     /** Pagination */
     pageMinLimit = 10,
@@ -56,4 +59,4 @@ export const
         ),
     };
 
-export * from './instance';
+export * from './database.config';

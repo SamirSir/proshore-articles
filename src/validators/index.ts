@@ -12,4 +12,5 @@ class RequestValidator {
 
 export { RequestValidator };
 
+export * from './user.validator';
 export * from './article.validator';
