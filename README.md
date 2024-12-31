@@ -69,14 +69,15 @@ npx sequelize --options-path ./.sequelize db:migrate
 
 To test endpoints, make HTTP request routes in your postman
 
-Auth routes 
+Auth routes:
 ```sh
 POST http://localhost/api/v1/auth/signup
 POST http://localhost/api/v1/auth/login
 ```
 
-Articles Routes
 Once a user is signup, login to get access token and authorize following routes with Bearer <access_token>
+
+Articles Routes:
 ```sh
 GET http://localhost/api/v1/articles/
 POST http://localhost/api/v1/articles/
