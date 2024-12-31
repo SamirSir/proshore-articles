@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 
 import { UserService } from '../services';
-import { UserLoginValidator, UserSignupValidator } from '../validators';
+import { userLoginValidator, userSignupValidator } from '../validators';
 import { JWT } from '../utils';
 import { jwtAuthSecret } from '../config';
 
@@ -13,7 +13,7 @@ export class UserController {
             email: req.body.email,
             password: req.body.password,
         };
-        const { error, value } = UserSignupValidator.validate(inputParams);
+        const { error, value } = userSignupValidator.validate(inputParams);
 
         if (error) res.status(500).send(error.message);
         else {
@@ -33,7 +33,7 @@ export class UserController {
             email: req.body.email,
             password: req.body.password,
         };
-        const { error, value } = UserLoginValidator.validate(inputParams);
+        const { error, value } = userLoginValidator.validate(inputParams);
 
         if (error) res.status(500).send(error.message);
         else {

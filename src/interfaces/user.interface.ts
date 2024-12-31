@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import { CreationOptional, Model } from 'sequelize';
 
 import { ModelTimestampExtend } from '.';
@@ -13,3 +14,7 @@ export interface UserInterface extends InputUserInterface, ModelTimestampExtend 
 }
 
 export interface UserModelInterface extends Model<UserInterface, Partial<InputUserInterface>>, UserInterface { }
+
+export interface UserRequestInterface extends Request {
+    currentUser?: Partial<UserInterface>;
+}

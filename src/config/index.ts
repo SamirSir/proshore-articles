@@ -42,12 +42,19 @@ export const
         access: mustExist(process.env.JWT_AUTH_SECRET_ACCESS, 'JWT_AUTH_SECRET_ACCESS'),
     },
     /** Pagination */
+    pageDefaultOffset = 0,
     pageMinLimit = 10,
     pageMaxLimit = 100,
     pageEventMaxLimit = 4000,
-    /** Order */
-    defaultOrder = 'id',
-    defaultSort = SortEnum.asc,
+    /** Sort-Order */
+    defaultOrder = SortEnum.desc,
+    defaultSort = 'updatedAt',
+    validFileMimeType = [
+        'image/jpeg',
+        'image/png',
+        'application/pdf',
+        'application/json'
+    ],
     swaggerBasicAuth = {
         username: mustExist(
             process.env.SWAGGER_BASIC_AUTH_USERNAME,

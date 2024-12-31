@@ -32,7 +32,7 @@ class Server {
 
         // API Routes
         this.expressApp.use('/api/v1/auth', userRouter);
-        // this.expressApp.use('/api/v1/articles', articleRouter);
+        this.expressApp.use('/api/v1/articles', articleRouter);
 
         // Swagger
         this.expressApp.get(
@@ -59,11 +59,6 @@ class Server {
         //     '/swagger',
         //     swaggerUI.setup(swaggerSpec, optionsSwaggerUI)
         // );
-
-        // // Error Handler
-        // this.expressApp.use(errorHandler.genericErrorHandler);
-        // this.expressApp.use(errorHandler.methodNotAllowed);
-        // this.expressApp.use(errorHandler.notFound);
     }
 
     private corsOptions: cors.CorsOptions = {

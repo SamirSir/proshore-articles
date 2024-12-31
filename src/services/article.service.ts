@@ -1,7 +1,8 @@
-import { CreationOptional, WhereOptions } from 'sequelize';
+import { CreationOptional, Order, WhereOptions } from 'sequelize';
 
 import { InputArticleInterface, ArticleInterface } from '../interfaces';
 import { ArticleRepository } from '../repositories';
+import { SortEnum } from '../enums';
 
 export class ArticleService {
     private repository: ArticleRepository;
@@ -14,24 +15,55 @@ export class ArticleService {
         return this.repository.create(input);
     }
 
-    public async get(id: number): Promise<ArticleInterface> {
-        return this.repository.findByPk(id);
+    public async findByPk(id: number): Promise<ArticleInterface> {
+        const articleExists = await this.repository.findByPk(id);
+        if (!articleExists) throw new Error(`articleService.notExists.error`);
+        return articleExists;
     }
 
-    public async list({ userId }: { userId?: string; }): Promise<ArticleInterface[]> {
+    public async findAll({ userId }: { userId?: string; }): Promise<ArticleInterface[]> {
         let where: WhereOptions<any> = {};
-        if (userId) where = { ...where, userId: userId };
+        if (userId) where = { ...where, userId };
         return this.repository.findAll({ where });
     }
 
-    public async update(id: CreationOptional<number>, input: Partial<InputArticleInterface>): Promise<ArticleInterface> {
+    public async findAndCountAll({
+        offset,
+        limit,
+        sort,
+        order,
+        userId,
+    }: {
+        offset: number,
+        limit: number,
+        sort: string,
+        order: SortEnum,
+        userId: number,
+    }): Promise<{
+        count: number;
+        rows: ArticleInterface[];
+    }> {
+        let where: WhereOptions<any> = {}, orderItem: Order = [];
+        if (order && sort) orderItem = [...orderItem, [sort, order]];
+        if (userId) where = { ...where, userId };
+
+        return this.repository.findAndCountAll({
+            where,
+            offset,
+            limit,
+            order: orderItem,
+            distinct: true,
+        });
+    }
+
+    public async updateOne(id: CreationOptional<number>, input: Partial<InputArticleInterface>): Promise<ArticleInterface> {
         const articleExists = await this.repository.findByPk(id);
         if (!articleExists) throw new Error('articleService.notExists.error');
         await this.repository.updateOne({ id, input });
         return this.repository.findByPk(id);
     }
 
-    public async delete(id: number): Promise<boolean> {
+    public async deleteOne(id: number): Promise<boolean> {
         const articleExists = await this.repository.findByPk(id);
         if (!articleExists) throw new Error('articleService.notExists.error');
         await this.repository.deleteOne(id);

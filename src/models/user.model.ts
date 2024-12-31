@@ -31,6 +31,17 @@ const userModel = sequelize.define<UserModelInterface>(
     timestamps: true,
     paranoid: true,
     underscored: true,
+    indexes: [
+      {
+          concurrently: true,
+          unique: true,
+          type: 'UNIQUE',
+          fields: ["email"],
+          where: {
+              deleted_at: null,
+          },
+      },
+  ],
   }
 );
 

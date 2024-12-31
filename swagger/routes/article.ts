@@ -1,7 +1,7 @@
 module.exports = {
     '/api/v1/articles/{id}': {
         get: {
-            tags: ['Customers'],
+            tags: ['Articles'],
             summary: 'Find Article by ID',
             security: [
                 // {

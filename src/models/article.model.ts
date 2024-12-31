@@ -31,15 +31,28 @@ const articleModel = sequelize.define<ArticleModelInterface>(
         content: {
             type: Sequelize.TEXT,
         },
-        imageUrl: {
-            type: Sequelize.STRING,
-            field: 'image_url'
+        fileMeta: {
+            type: Sequelize.JSONB,
+            field: "file_meta"
+        },
+        fileData: {
+            type: Sequelize.BLOB('medium'),
+            field: "file_data"
         },
     },
     {
         timestamps: true,
         paranoid: true,
         underscored: true,
+        indexes: [
+            {
+                concurrently: true,
+                fields: ["userId"],
+                where: {
+                    deleted_at: null,
+                },
+            },
+        ],
     }
 );
 

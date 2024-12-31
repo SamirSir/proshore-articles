@@ -1,10 +1,9 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('articles', {
+    await queryInterface.createTable('article_medias', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -15,22 +14,34 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id'
-        }
+          model: "users",
+          key: "id",
+        },
       },
-      title: {
-        type: Sequelize.STRING,
+      article_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "articles",
+          key: "id",
+        },
       },
-      content: {
-        type: Sequelize.TEXT,
+      original_name: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      file_meta: {
-        type: Sequelize.JSONB,
+      mime_type: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+      size: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        defaultValue: 0
       },
       file_data: {
         type: Sequelize.BLOB('medium'),
+        allowNull: false
       },
       created_at: {
         type: Sequelize.DATE,
@@ -45,9 +56,9 @@ module.exports = {
       },
     });
 
-    await queryInterface.addIndex('articles', ['user_id'], {
+    await queryInterface.addIndex('article_medias', ['user_id','article_id'], {
       concurrently: true,
-      name: 'articles_user_id',
+      name: 'article_medias_user_id_article_id',
       where: {
         deleted_at: null,
       },
@@ -55,7 +66,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeIndex("articles", 'articles_user_id');
-    await queryInterface.dropTable("articles");
-  },
+    await queryInterface.removeIndex('article_medias', 'article_medias_user_id_article_id');
+    await queryInterface.dropTable('article_medias');
+  }
 };

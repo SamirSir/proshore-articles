@@ -20,6 +20,12 @@ export class UserService {
     return this.repository.create(input);
   }
 
+  public async findByPk(id: number): Promise<UserInterface> {
+    const userExists = await this.repository.findByPk(id);
+    if (!userExists) throw new Error(`userService.notExists.error`);
+    return userExists;
+}
+
   public async findOne({ email }: { email?: string; }): Promise<UserInterface> {
     let where: WhereOptions<any> = {};
     if (email) where = { ...where, email: email };

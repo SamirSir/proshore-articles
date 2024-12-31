@@ -2,18 +2,12 @@ import { CreationOptional, Model } from 'sequelize';
 
 import { ModelTimestampExtend } from '.';
 
-export interface IArticle {
-    title: string,
-    description: string,
-    author: string,
-    published: boolean,
-}
-
 export interface InputArticleInterface {
     userId: number;
     title: string;
     content?: string;
-    imageUrl?: string;
+    fileMeta?: object;
+    fileData?: any;
 }
 
 export interface ArticleInterface extends InputArticleInterface, ModelTimestampExtend {
