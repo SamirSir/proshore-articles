@@ -65,23 +65,16 @@ To create tables in database run the following sequelize commands
 npx sequelize --options-path ./.sequelize db:migrate 
 ```
 
-## Endpoints
+## API Documentation
+You can access the API documentation through Swagger UI.
+Simply visit the following link in your browser after you run your project:
 
-To test endpoints, make HTTP request routes in your postman
-
-Auth routes:
 ```sh
-POST http://localhost/api/v1/auth/signup
-POST http://localhost/api/v1/auth/login
+http://localhost:9000/api/v1/swagger
 ```
 
-Once a user is signup, login to get access token and authorize following routes with Bearer <access_token>
+Additionally, if you need the JSON file containing the API documentation for frontend integration or other purposes, you can access it here:
 
-Articles Routes:
 ```sh
-GET http://localhost/api/v1/articles/
-POST http://localhost/api/v1/articles/
-GET http://localhost/api/v1/articles/:id
-PUT http://localhost/api/v1/articles/:id
-DELETE http://localhost/api/v1/articles/:id
+http://localhost:9000/api/v1/swagger.json
 ```
