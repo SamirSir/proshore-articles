@@ -1,8 +1,8 @@
 import { SortEnum } from "../enums";
 
 export interface RequestQueryParamsInterface {
-    offset?: any;
-    limit?: any;
+    page?: number;
+    limit?: number;
     order?: string;
     sort?: string;
 }

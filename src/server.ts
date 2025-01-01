@@ -2,18 +2,21 @@ import 'module-alias/register';
 import cors from 'cors';
 import express from 'express'
 import morgan from 'morgan';
-// import swaggerUI from 'swagger-ui-express';
+import swaggerUI from 'swagger-ui-express';
 import basicAuth from 'express-basic-auth';
 
 import {
     appPort,
     appCorsWhitelist,
     Database,
-    swaggerBasicAuth,
+    // swaggerBasicAuth,
     appHostURI,
+    swaggerBasicAuth,
+    appEnvironment,
 } from './config';
 import { articleRouter, userRouter } from './routes';
 import { optionsSwaggerUI, swaggerSpec } from './utils';
+import { EnvironmentEnum } from './enums';
 
 class Server {
     expressApp: express.Application;
@@ -35,30 +38,30 @@ class Server {
         this.expressApp.use('/api/v1/articles', articleRouter);
 
         // Swagger
-        this.expressApp.get(
-            '/swagger.json',
-            basicAuth({
-                users: { admin: swaggerBasicAuth.password },
-                challenge: true,
-            }),
-            (req, res) => {
-                res.setHeader('Context-Type', 'application/json');
-                res.send(swaggerSpec);
-            }
-        );
-
-        // this.expressApp.use(
-        //     '/swagger',
-        //     basicAuth({
-        //         users: { admin: swaggerBasicAuth.password },
-        //         challenge: true,
-        //     }),
-        //     swaggerUI.serve
-        // );
-        // this.expressApp.get(
-        //     '/swagger',
-        //     swaggerUI.setup(swaggerSpec, optionsSwaggerUI)
-        // );
+        if (appEnvironment !== EnvironmentEnum.prod) {
+            this.expressApp.get('/swagger.json',
+                basicAuth({
+                    users: { admin: swaggerBasicAuth.password },
+                    challenge: true,
+                }),
+                (req, res) => {
+                    res.setHeader('Context-Type', 'application/json');
+                    res.send(swaggerSpec);
+                }
+            );
+            this.expressApp.use(
+                '/swagger',
+                basicAuth({
+                    users: { admin: swaggerBasicAuth.password },
+                    challenge: true,
+                }),
+                swaggerUI.serve
+            );
+            this.expressApp.get(
+                '/swagger',
+                swaggerUI.setup(swaggerSpec, optionsSwaggerUI)
+            );
+        }
     }
 
     private corsOptions: cors.CorsOptions = {
