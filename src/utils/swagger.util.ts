@@ -9,6 +9,7 @@ const getPathRoutes = (path: string) => `${baseRoutes}${path}`;
 
 const getDocs = (basePath: string, getPath: Function) => {
     console.info(`Swagger UI is available at ${appHostURI}/swagger`);
+    console.info(`Swagger API JSON Doc is available at ${appHostURI}/swagger.json`);
 
     return fs.readdirSync(basePath).reduce((acc, file) => {
         const data = require(getPath(`/${file}`));
@@ -41,7 +42,7 @@ const swaggerOptions: swaggerJSDoc.Options = {
         servers: [
             {
                 url: appHostURI,
-                description: "PROSHORE Article Swagger UI",
+                description: "PROSHORE Article APIs base URL",
             },
         ],
         components: {
