@@ -9,7 +9,6 @@ const getPathRoutes = (path: string) => `${baseRoutes}${path}`;
 
 const getDocs = (basePath: string, getPath: Function) => {
     console.info(`Swagger UI is available at ${appHostURI}/swagger`);
-    console.info(`Swagger API JSON Doc is available at ${appHostURI}/swagger.json`);
 
     return fs.readdirSync(basePath).reduce((acc, file) => {
         const data = require(getPath(`/${file}`));
@@ -24,9 +23,9 @@ const swaggerOptions: swaggerJSDoc.Options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: `Api ${appName} Documentation`,
+            title: `${appName} API Documentation`,
             version: "1.0.0",
-            description: 'API documentation for the project',
+            description: 'Comprehensive API documentation for the PROSHORE articles project, providing all endpoints. This documentation aims to guide developers in integrating and utilizing the article management features efficiently.',
         },
         consumes: ["application/json"],
         produces: ["application/json"],
