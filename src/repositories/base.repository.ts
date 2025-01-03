@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { WhereOptions } from 'sequelize';
 import { Attributes, GroupOption, IncludeOptions, Order } from 'sequelize/types/model';
 
@@ -66,7 +67,7 @@ interface RepositoryReader<RT> {
 }
 
 export abstract class BaseRepository<IT, RT> implements RepositoryWriter<IT, RT>, RepositoryReader<RT> {
-  constructor(public readonly model: any) { }
+  constructor(public readonly model: any) {}
 
   findAll({
     where,
@@ -87,7 +88,16 @@ export abstract class BaseRepository<IT, RT> implements RepositoryWriter<IT, RT>
     distinct?: boolean;
     logging?: boolean;
   }): Promise<RT[]> {
-    return this.model.findAll({ where, attributes, include, order, group, limit, logging, distinct });
+    return this.model.findAll({
+      where,
+      attributes,
+      include,
+      order,
+      group,
+      limit,
+      logging,
+      distinct,
+    });
   }
 
   findOne({
@@ -141,11 +151,19 @@ export abstract class BaseRepository<IT, RT> implements RepositoryWriter<IT, RT>
       offset,
       limit,
       distinct,
-      logging
+      logging,
     });
   }
 
-  count({ where, include, distinct }: { where?: WhereOptions<any>, include?: any, distinct?: boolean }): Promise<number> {
+  count({
+    where,
+    include,
+    distinct,
+  }: {
+    where?: WhereOptions<any>;
+    include?: any;
+    distinct?: boolean;
+  }): Promise<number> {
     return this.model.count({ where, include, distinct: distinct ?? true });
   }
 

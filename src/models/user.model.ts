@@ -33,16 +33,16 @@ const userModel = sequelize.define<UserModelInterface>(
     underscored: true,
     indexes: [
       {
-          concurrently: true,
-          unique: true,
-          type: 'UNIQUE',
-          fields: ["email"],
-          where: {
-              deleted_at: null,
-          },
+        concurrently: true,
+        unique: true,
+        type: 'UNIQUE',
+        fields: ['email'],
+        where: {
+          deleted_at: null,
+        },
       },
-  ],
-  }
+    ],
+  },
 );
 
 export default userModel;

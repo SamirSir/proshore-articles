@@ -1,10 +1,10 @@
-import express from "express";
-import multer from "multer";
+import express from 'express';
+import multer from 'multer';
 
-import { ArticleController } from "../controllers";
-import { AuthGuard } from "../middlewares";
+import { ArticleController } from '../controllers';
+import { AuthGuard } from '../middlewares';
 
-const upload = multer({ dest: "public/uploads/" })
+const upload = multer({ dest: 'public/uploads/' });
 
 export const articleRouter = express.Router();
 

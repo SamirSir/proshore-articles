@@ -14,34 +14,34 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
-          key: "id",
+          model: 'users',
+          key: 'id',
         },
       },
       article_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "articles",
-          key: "id",
+          model: 'articles',
+          key: 'id',
         },
       },
       original_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       mime_type: {
         type: Sequelize.STRING(50),
-        allowNull: false
+        allowNull: false,
       },
       size: {
         type: Sequelize.BIGINT,
         allowNull: false,
-        defaultValue: 0
+        defaultValue: 0,
       },
       file_data: {
         type: Sequelize.BLOB('medium'),
-        allowNull: false
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -56,7 +56,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.addIndex('article_medias', ['user_id','article_id'], {
+    await queryInterface.addIndex('article_medias', ['user_id', 'article_id'], {
       concurrently: true,
       name: 'article_medias_user_id_article_id',
       where: {
@@ -65,8 +65,9 @@ module.exports = {
     });
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async down(queryInterface, Sequelize) {
     await queryInterface.removeIndex('article_medias', 'article_medias_user_id_article_id');
     await queryInterface.dropTable('article_medias');
-  }
+  },
 };

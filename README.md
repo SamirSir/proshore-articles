@@ -62,10 +62,11 @@ yarn start
 To create tables in database run the following sequelize commands
 
 ```sh
-npx sequelize --options-path ./.sequelize db:migrate 
+npx sequelize --options-path ./.sequelize db:migrate
 ```
 
 ## API Documentation
+
 You can access the API documentation through Swagger UI.
 Simply visit the following link in your browser after you run your project:
 
