@@ -16,8 +16,8 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'users',
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       title: {
         type: Sequelize.STRING,
@@ -55,7 +55,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeIndex("articles", 'articles_user_id');
-    await queryInterface.dropTable("articles");
+    await queryInterface.removeIndex('articles', 'articles_user_id');
+    await queryInterface.dropTable('articles');
   },
 };
