@@ -9,6 +9,7 @@ export class JWT {
     try {
       return jsonwebtoken.verify(token, secretOrPublicKey);
     } catch (error) {
+      console.error(error);
       return null;
     }
   }
@@ -17,6 +18,7 @@ export class JWT {
     try {
       return jsonwebtoken.decode(token, { json: true });
     } catch (error) {
+      console.error(error);
       return null;
     }
   }

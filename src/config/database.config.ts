@@ -68,8 +68,8 @@ class Database {
     try {
       await this.sequelize.authenticate();
       console.info(`🐘 ${db.dialect} database connected at ${db.host}:${db.port}`);
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error: unknown) {
+      console.error(error);
       process.exit(1);
     }
   }

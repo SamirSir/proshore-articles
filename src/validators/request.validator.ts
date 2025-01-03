@@ -3,7 +3,7 @@ import { ArraySchema, ObjectSchema, StringSchema } from 'joi';
 
 class RequestValidator {
   private static instance: RequestValidator;
-  private constructor() {}
+  private constructor() { }
 
   public static get(): RequestValidator {
     if (!RequestValidator.instance) {
@@ -13,7 +13,7 @@ class RequestValidator {
   }
 
   public check(schema: ObjectSchema | ArraySchema | StringSchema, input: object | string, res: Response) {
-    const { value, error } = schema.validate(input, { abortEarly: false });
+    const { error } = schema.validate(input, { abortEarly: false });
     if (error) res.status(400).send(error.message);
   }
 }

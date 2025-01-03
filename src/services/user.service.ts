@@ -27,7 +27,7 @@ export class UserService {
   }
 
   public async findOne({ email }: { email?: string }): Promise<UserInterface> {
-    let where: WhereOptions<any> = {};
+    let where: WhereOptions = {};
     if (email) where = { ...where, email: email };
     return this.repository.findOne({ where });
   }

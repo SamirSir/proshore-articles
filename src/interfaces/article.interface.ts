@@ -7,7 +7,7 @@ export interface InputArticleInterface {
   title: string;
   content?: string;
   fileMeta?: object;
-  fileData?: any;
+  fileData?: Buffer;
 }
 
 export interface ArticleInterface extends InputArticleInterface, ModelTimestampExtend {

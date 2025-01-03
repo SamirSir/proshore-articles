@@ -4,20 +4,16 @@ import swaggerJSDoc from 'swagger-jsdoc';
 
 import { appEnvironment, appHostURI, appName } from '../config';
 
-const baseRoutes = _path.resolve('./swagger/routes');
-const getPathRoutes = (path: string) => `${baseRoutes}${path}`;
-
-const getDocs = (basePath: string, getPath: Function) => {
-  console.info(`Swagger UI is available at ${appHostURI}/swagger`);
-
+const getDocs = (basePath: string) => {
   return fs.readdirSync(basePath).reduce((acc, file) => {
-    const data = require(getPath(`/${file}`));
-    acc = { ...acc, ...data };
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    acc = { ...acc, ...require(`${basePath}/${file}`) };
     return acc;
   }, {});
 };
 
-const docsSources = getDocs(baseRoutes, getPathRoutes);
+const swaggerRoutesBasePath = _path.resolve('./swagger/routes');
+const docsSources = getDocs(swaggerRoutesBasePath);
 
 const swaggerOptions: swaggerJSDoc.Options = {
   definition: {
@@ -181,4 +177,5 @@ const optionsSwaggerUI = {
   },
 };
 
+console.info(`Swagger UI is available at ${appHostURI}/swagger`);
 export { optionsSwaggerUI, swaggerSpec };

@@ -23,6 +23,7 @@ class AuthGuard {
       res.status(401).send({ message: 'Authorization failed' });
     } else {
       const accessToken = authorization.replace('Bearer ', '');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const decodedToken: any = JWT.verify(accessToken, jwtAuthSecret.access);
       if (!decodedToken || decodedToken.exp < Date.now() / 1000) {
         res.status(403).send({ error: 'Invalid or expired token' });

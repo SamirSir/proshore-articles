@@ -54,6 +54,7 @@ module.exports = {
     });
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async down(queryInterface, Sequelize) {
     await queryInterface.removeIndex('articles', 'articles_user_id');
     await queryInterface.dropTable('articles');

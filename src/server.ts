@@ -77,15 +77,17 @@ class Server {
   private async connectDB() {
     try {
       await Database.connect();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      throw new Error(error);
+      throw error;
     }
   }
 
   public start() {
     this.connectDB();
-    this.expressApp.listen(this.expressApp.get('port'), () => console.info(`🚀 Server is running at ${appHostURI}`));
+    this.expressApp.listen(this.expressApp.get('port'), () => {
+      console.info(`🚀 Server is running at ${appHostURI}`);
+    });
   }
 }
 

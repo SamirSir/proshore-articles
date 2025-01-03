@@ -22,7 +22,7 @@ export class ArticleService {
   }
 
   public async findAll({ userId }: { userId?: string }): Promise<ArticleInterface[]> {
-    let where: WhereOptions<any> = {};
+    let where: WhereOptions = {};
     if (userId) where = { ...where, userId };
     return this.repository.findAll({ where });
   }
@@ -43,7 +43,7 @@ export class ArticleService {
     count: number;
     rows: ArticleInterface[];
   }> {
-    let where: WhereOptions<any> = {},
+    let where: WhereOptions = {},
       orderItem: Order = [];
     if (order && sort) orderItem = [...orderItem, [sort, order]];
     if (userId) where = { ...where, userId };

@@ -1,5 +1,3 @@
-import { WhereOptions } from 'sequelize';
-
 import { InputArticleMediaInterface, ArticleMediaInterface } from '../interfaces';
 import { ArticleMediaRepository } from '../repositories';
 

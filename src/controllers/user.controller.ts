@@ -7,6 +7,7 @@ import { JWT } from '../utils';
 import { jwtAuthSecret } from '../config';
 
 export class UserController {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static async signup(req: Request, res: Response): Promise<any> {
     const inputParams = {
       name: req.body.name,
@@ -14,18 +15,19 @@ export class UserController {
       password: req.body.password,
     };
     const { error, value } = userSignupValidator.validate(inputParams);
-
     if (error) return res.status(500).json({ message: error.message });
     try {
       const salt = await bcrypt.genSalt(10);
       value.password = await bcrypt.hash(inputParams.password, salt);
-      const user = await new UserService().create(value);
+      await new UserService().create(value);
       return res.status(201).json({ message: 'User registered successfully' });
-    } catch (error: any) {
-      return res.status(500).json({ message: error.message });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error registerig user' });
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static async login(req: Request, res: Response): Promise<any> {
     const inputParams = {
       email: req.body.email,
@@ -50,8 +52,9 @@ export class UserController {
         message: 'User logged in successfully',
         data: { accessToken },
       });
-    } catch (error: any) {
-      return res.status(500).json({ message: error.message });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error while logging in user' });
     }
   }
 }

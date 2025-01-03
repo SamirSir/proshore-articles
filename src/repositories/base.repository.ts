@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { WhereOptions } from 'sequelize';
 import { Attributes, GroupOption, IncludeOptions, Order } from 'sequelize/types/model';
 

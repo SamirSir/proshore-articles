@@ -8,7 +8,7 @@ export interface InputArticleMediaInterface {
   originalName: string;
   mimeType: string;
   size: number;
-  fileData: any;
+  fileData: Buffer;
 }
 
 export interface ArticleMediaInterface extends InputArticleMediaInterface, ModelTimestampExtend {
