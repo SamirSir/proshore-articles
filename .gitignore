@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # static files
-public/uploads
+public/uploads/

@@ -3,7 +3,7 @@ import { ArraySchema, ObjectSchema, StringSchema } from 'joi';
 
 class RequestValidator {
   private static instance: RequestValidator;
-  private constructor() { }
+  private constructor() {}
 
   public static get(): RequestValidator {
     if (!RequestValidator.instance) {
