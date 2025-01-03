@@ -174,7 +174,7 @@ const optionsSwaggerUI = {
         urls: [
             {
                 url: `${appHostURI}/swagger.json`,
-                name: `PROSHORE Article Swagger UI: ${appEnvironment} `,
+                name: `PROSHORE Article Swagger UI: ${appEnvironment}`,
             },
         ],
     },

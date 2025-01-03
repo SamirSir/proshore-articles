@@ -41,7 +41,7 @@ class Server {
         if (appEnvironment !== EnvironmentEnum.prod) {
             this.expressApp.get('/swagger.json',
                 basicAuth({
-                    users: { admin: swaggerBasicAuth.password },
+                    users: { [swaggerBasicAuth.username]: swaggerBasicAuth.password },
                     challenge: true,
                 }),
                 (req, res) => {
@@ -52,7 +52,7 @@ class Server {
             this.expressApp.use(
                 '/swagger',
                 basicAuth({
-                    users: { admin: swaggerBasicAuth.password },
+                    users: { [swaggerBasicAuth.username]: swaggerBasicAuth.password },
                     challenge: true,
                 }),
                 swaggerUI.serve
