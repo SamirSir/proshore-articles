@@ -5,15 +5,7 @@ import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
 import basicAuth from 'express-basic-auth';
 
-import {
-  appPort,
-  appCorsWhitelist,
-  Database,
-  // swaggerBasicAuth,
-  appHostURI,
-  swaggerBasicAuth,
-  appEnvironment,
-} from './config';
+import { appPort, appCorsWhitelist, Database, appHostURI, swaggerBasicAuth, appEnvironment } from './config';
 import { articleRouter, userRouter } from './routes';
 import { optionsSwaggerUI, swaggerSpec } from './utils';
 import { EnvironmentEnum } from './enums';
