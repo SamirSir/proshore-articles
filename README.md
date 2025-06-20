@@ -23,13 +23,17 @@ Whenever dependencies in `package.json` are changed, run the following command:
 
 ```sh
 npm install
+```
 
-or
+OR
 
+```sh
 yarn install
+```
 
-or
+OR
 
+```sh
 yarn
 ```
 
@@ -39,9 +43,11 @@ To incrementally build the project:
 
 ```sh
 npm run build
+```
 
-or
+OR
 
+```
 yarn build
 ```
 
@@ -51,9 +57,11 @@ To incrementally start the project:
 
 ```sh
 npm run start
+```
 
-or
+OR
 
+```
 yarn start
 ```
 
