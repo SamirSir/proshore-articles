@@ -79,3 +79,5 @@ Additionally, if you need the JSON file containing the API documentation for fro
 ```sh
 http://localhost:9000/api/v1/swagger.json
 ```
+
+reformat: prettify code bsae using prettier auto formatter
